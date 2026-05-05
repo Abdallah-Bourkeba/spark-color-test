@@ -11,27 +11,21 @@
   html, body {
     width: 100%; height: 100%;
     font-family: 'Cairo', sans-serif;
-    background-color: #f4f6f9; /* خلفية فاتحة */
-    overflow: hidden; /* يمنع السكرول الخارجي */
+    background-color: #f4f6f9;
+    overflow: hidden;
     color: #333;
   }
 
   /* ══════════════════════════════════
-     الخلفية المتحركة (ألوان وجزيئات)
+     الخلفية المتحركة
   ══════════════════════════════════ */
   .bg-shapes {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 0;
-    overflow: hidden;
-    pointer-events: none;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 0; overflow: hidden; pointer-events: none;
   }
   .shape {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(50px);
-    opacity: 0.6;
-    animation: floatShape 10s infinite alternate ease-in-out;
+    position: absolute; border-radius: 50%; filter: blur(50px);
+    opacity: 0.6; animation: floatShape 10s infinite alternate ease-in-out;
   }
   .shape-red { background: #ff7675; width: 40vw; height: 40vw; top: -10%; right: -10%; }
   .shape-blue { background: #74b9ff; width: 35vw; height: 35vw; bottom: -10%; left: -10%; animation-delay: -3s; }
@@ -43,11 +37,9 @@
     100% { transform: translate(40px, -40px) scale(1.1); }
   }
 
-  /* الجزيئات الطائرة */
   .particle {
     position: fixed; border-radius: 50%; pointer-events: none; opacity: 0;
-    z-index: 1;
-    animation: floatUp var(--d) var(--delay) ease-in-out infinite;
+    z-index: 1; animation: floatUp var(--d) var(--delay) ease-in-out infinite;
   }
   @keyframes floatUp { 
     0% { transform: translateY(105vh) scale(0.5); opacity: 0; } 
@@ -112,7 +104,7 @@
   .btn-no:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(214, 48, 49, 0.5); }
 
   /* ══════════════════════════════════
-     اختيار الألوان (Grid)
+     اختيار الألوان
   ══════════════════════════════════ */
   .reward-title { font-family: 'Marhey', cursive; font-size: clamp(2rem, 6vw, 3rem); color: #2d3436; margin-bottom: 5px; text-align: center; }
   .reward-sub { color: #636e72; font-size: 1.2rem; margin-bottom: 25px; text-align: center; font-weight: bold; }
@@ -155,15 +147,12 @@
   .single-color-emoji { font-size: 5rem; margin-bottom: 10px; animation: emojiBounce 2s infinite; }
   .single-color-name { font-family: 'Marhey', cursive; font-size: 2.5rem; color: #fff; text-shadow: 2px 2px 10px rgba(0,0,0,0.2); margin-bottom: 20px; }
   
-  /* تنسيق النقاط داخل الكارت */
-  .color-points {
-    list-style: none; padding: 0; margin: 0 0 15px 0; text-align: right;
-  }
+  .color-points { list-style: none; padding: 0; margin: 0 0 15px 0; text-align: right; }
   .color-points li {
     font-size: 1.1rem; color: #fff; background: rgba(0, 0, 0, 0.15);
     padding: 12px 15px; margin-bottom: 10px; border-radius: 12px;
-    box-shadow: inset 0 0 10px rgba(255,255,255,0.05);
-    display: flex; align-items: center;
+    box-shadow: inset 0 0 10px rgba(255,255,255,0.05); display: flex; align-items: center;
+    font-weight: 700;
   }
   .color-points li span { margin-left: 10px; font-size: 1.3rem; }
 
@@ -191,7 +180,7 @@
   .email-address { font-size: 1.2rem; font-weight: 900; color: #0984e3; background: #f0f8ff; padding: 10px 15px; border-radius: 10px; word-break: break-all;}
 
   /* ══════════════════════════════════
-     تأثيرات وانفجار الإيموجي
+     تأثيرات
   ══════════════════════════════════ */
   .click-emoji { position: fixed; font-size: 3rem; pointer-events: none; z-index: 9999; animation: clickBurst 1s ease-out forwards; }
   @keyframes clickBurst { 0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 1; } 40% { transform: translate(-50%, -50%) scale(1.5) rotate(15deg); opacity: 1; } 100% { transform: translate(-50%, calc(-50% - 150px)) scale(0.5) rotate(-20deg); opacity: 0; } }
@@ -207,7 +196,6 @@
 </head>
 <body>
 
-<!-- الخلفية المائية والجزيئات الطائرة -->
 <div class="bg-shapes">
     <div class="shape shape-red"></div>
     <div class="shape shape-blue"></div>
@@ -216,43 +204,42 @@
 </div>
 <div id="particles-container" style="position: fixed; inset: 0; pointer-events: none; z-index: 1;"></div>
 
-<!-- اللوجو الصغير الطائر -->
 <img src="image_0345b5.png" alt="Spark Logo" id="topLogo" class="top-logo" onclick="openEmail()">
 
-<!-- الشاشة الأولى: السؤال -->
+<!-- الشاشة الأولى -->
 <div class="page active" id="page1">
   <div class="page-content">
     <div class="glass-box">
-      <img src="image_0345b5.png" alt="Spark Logo" class="big-logo" onclick="openEmail()" title="اضغط للتواصل معنا">
-      <h1 class="box-title">هل فكرت في <span class="color-word">لون معين</span> في دماغك دلوقتي؟ 🤔</h1>
-      <p class="box-sub">عقلك الباطن اختار خلاص.. جاهز تكتشف السر؟ 👀</p>
+      <img src="image_0345b5.png" alt="Spark Logo" class="big-logo" onclick="openEmail()" title="اضغط عشان تكلمنا">
+      <h1 class="box-title">رسيت على <span class="color-word">لون معين</span> في دماغك دلوقتي؟ 🤔</h1>
+      <p class="box-sub">عقلك الباطن قرر خلاص.. جاهز تكتشف السر؟ 👀</p>
       <div class="btn-row">
-        <button class="btn btn-yes" onclick="go('reward')">أيوة جاهز! ✌️</button>
-        <button class="btn btn-no" onclick="go('think')">لأ لسه 🤔</button>
+        <button class="btn btn-yes" onclick="go('reward')">أيوة، جاهز! ✌️</button>
+        <button class="btn btn-no" onclick="go('think')">لأ لسه بفكر 🤔</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- الشاشة التانية: لو داس لأ لسه -->
+<!-- الشاشة التانية -->
 <div class="page" id="page2">
   <div class="page-content">
     <div class="glass-box">
       <h1 class="box-title">روح فكر بسرعة وتعالى! 🏃‍♂️</h1>
-      <p class="box-sub">الألوان مستنياك تختارها.. متأخرش علينا ⏳</p>
+      <p class="box-sub">الألوان مستنياك.. متتأخرش علينا ⏳</p>
       <div class="btn-row">
-        <button class="btn btn-yes" onclick="go('reward')">خلاص فكرت</button>
+        <button class="btn btn-yes" onclick="go('reward')">خلاص جبت اللون</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- الشاشة الثالثة: اختيار اللون -->
+<!-- الشاشة الثالثة -->
 <div class="page" id="page4">
   <div class="page-content">
     <div style="position: relative; z-index: 2; text-align: center; width: 100%;">
-      <div class="reward-title">اللون الخاص بيك 🎨</div>
-      <p class="reward-sub">اختار اللون اللي فكرت فيه عشان تعرف شخصيتك</p>
+      <div class="reward-title">لونك طلع إيه؟ 🎨</div>
+      <p class="reward-sub">دوس على اللون اللي فكرت فيه عشان تعرف شخصيتك</p>
       
       <div class="color-grid">
         <div class="color-cell c-red" onclick="showColor('red', event)">
@@ -272,95 +259,92 @@
         </div>
       </div>
       
-      <button class="btn" style="background: #e2e8f0; color: #2d3436;" onclick="go('page1')">↺ رجوع للبداية</button>
+      <button class="btn" style="background: #e2e8f0; color: #2d3436;" onclick="go('page1')">↺ أرجع من الأول</button>
     </div>
   </div>
 </div>
 
-<!-- الشاشة الرابعة: النتيجة -->
+<!-- الشاشة الرابعة -->
 <div class="page modal-overlay" id="page5" onclick="go('reward')">
   <div class="page-content">
     <div class="single-color-card" id="singleColorCard" onclick="event.stopPropagation()">
       <span class="close-btn" onclick="go('reward')">✖</span>
       <div class="single-color-emoji" id="singleColorEmoji">🎨</div>
       <div class="single-color-name" id="singleColorName">اللون</div>
-      
-      <!-- محتوى اللون سيتم حقنه هنا عبر الجافاسكريبت -->
       <div id="singleColorContent"></div>
-      
     </div>
   </div>
 </div>
 
-<!-- شاشة كارت الإيميل -->
+<!-- شاشة الإيميل -->
 <div class="page modal-overlay" id="emailModal" onclick="closeEmail()">
   <div class="page-content">
     <div class="email-card" onclick="event.stopPropagation()">
       <span class="close-btn close-btn-dark" onclick="closeEmail()">✖</span>
       <div class="email-icon">📬</div>
-      <h2 class="email-title">تواصل معنا</h2>
-      <p style="color: #636e72; margin-bottom: 15px;">يسعدنا تواصلك مع فريق Spark</p>
+      <h2 class="email-title">كلمنا</h2>
+      <p style="color: #636e72; margin-bottom: 15px;">فريق Spark دايماً معاك، ابعتلنا في أي وقت!</p>
       <div class="email-address">spark.team.asu@gmail.com</div>
     </div>
   </div>
 </div>
 
 <script>
-  // بيانات الألوان مع النقاط والروابط الخارجية
+  // البيانات بالعامية المصرية مع لينكات حقيقية من موقع "موضوع"
   const colorData = {
     red: {
       name: 'الأحمر', emoji: '🔥', clickEmoji: '🧨', class: 'c-red',
-      link: 'https://www.google.com/search?q=سيكولوجية+اللون+الأحمر',
+      link: 'https://mawdoo3.com/%D8%AF%D9%84%D8%A7%D9%84%D8%A9_%D8%A7%D9%84%D9%84%D9%88%D9%86_%D8%A7%D9%84%D8%A3%D8%AD%D9%85%D8%B1',
       points: [
-        { icon: '🔴', text: 'يرمز للطاقة، الشغف، والحماس.' },
-        { icon: '🚀', text: 'لون قوي يجذب الانتباه بسرعة.' },
-        { icon: '🎯', text: 'يدل على شخصية تحب المبادرة ولا تخشى لفت الأنظار.' }
+        { icon: '🔴', text: 'كله طاقة وحماس وشغف ملوش حدود.' },
+        { icon: '🚀', text: 'لون بيخطف العين ويلفت الانتباه في ثانية.' },
+        { icon: '🎯', text: 'بيدل إنك شخص مبادر ومبيهمكش تبقى في الصورة.' }
       ],
       quote: '🥊 "أنت غالباً بتحب الأكشن وممكن تتخانق مع دبان وشك"'
     },
     blue: {
       name: 'الأزرق', emoji: '🌊', clickEmoji: '💎', class: 'c-blue',
-      link: 'https://www.google.com/search?q=سيكولوجية+اللون+الأزرق',
+      link: 'https://mawdoo3.com/%D8%AF%D9%84%D8%A7%D9%84%D8%A9_%D8%A7%D9%84%D9%84%D9%88%D9%86_%D8%A7%D9%84%D8%A3%D8%B2%D8%B1%D9%82',
       points: [
-        { icon: '🔵', text: 'يعبر عن الهدوء، الثقة، والاحترافية.' },
-        { icon: '🧠', text: 'يعتبر لون العقل والسلام الداخلي.' },
-        { icon: '🛡️', text: 'يدل على شخصية عقلانية ومستقرة وموضع ثقة.' }
+        { icon: '🔵', text: 'بيعبر عن الهدوء والثقة والاحترافية في التعامل.' },
+        { icon: '🧠', text: 'لون العقل والسلام الداخلي والروقان.' },
+        { icon: '🛡️', text: 'بيدل إنك شخص عاقل، راسي، والناس بتثق فيك.' }
       ],
       quote: '🥶 "أنت شخص رايق لدرجة تثير الريبة والشك"'
     },
     yellow: {
       name: 'الأصفر', emoji: '💡', clickEmoji: '☀️', class: 'c-yellow',
-      link: 'https://www.google.com/search?q=سيكولوجية+اللون+الأصفر',
+      link: 'https://mawdoo3.com/%D8%AF%D9%84%D8%A7%D9%84%D8%A9_%D8%A7%D9%84%D9%84%D9%88%D9%86_%D8%A7%D9%84%D8%A3%D8%B5%D9%81%D8%B1',
       points: [
-        { icon: '🟡', text: 'لون السعادة، التفاؤل، والإبداع.' },
-        { icon: '⚡', text: 'يحفز النشاط الذهني ويساعد على التركيز.' },
-        { icon: '🎨', text: 'يدل على شخصية مرحة ومحبة للتجديد والابتكار.' }
+        { icon: '🟡', text: 'لون الفرفشة والسعادة والتفاؤل اللي بجد.' },
+        { icon: '⚡', text: 'بيشغل الدماغ ويخليك مركز ومصحصح.' },
+        { icon: '🎨', text: 'بيدل إنك شخص بتاع حركة وتجديد ومبتحبش الروتين.' }
       ],
       quote: '🤩 "بتضحك وتتفائل كتير لدرجة إن الناس بتقلق عليك"'
     },
     green: {
       name: 'الأخضر', emoji: '🌿', clickEmoji: '🍀', class: 'c-green',
-      link: 'https://www.google.com/search?q=سيكولوجية+اللون+الأخضر',
+      link: 'https://mawdoo3.com/%D8%AF%D9%84%D8%A7%D9%84%D8%A9_%D8%A7%D9%84%D9%84%D9%88%D9%86_%D8%A7%D9%84%D8%A3%D8%AE%D8%B6%D8%B1',
       points: [
-        { icon: '🟢', text: 'يرمز للطبيعة، النمو، والتوازن النفسي.' },
-        { icon: '🧘‍♂️', text: 'لون يخفف التوتر ويبعث على الراحة والطمأنينة.' },
-        { icon: '🤝', text: 'يدل على شخصية محبة للسلام وتتميز بالكرم والعطاء.' }
+        { icon: '🟢', text: 'لون الطبيعة والنمو والتوازن النفسي التمام.' },
+        { icon: '🧘‍♂️', text: 'بيهدي الأعصاب وبيجيب الراحة والطمأنينة.' },
+        { icon: '🤝', text: 'بيدل إنك شخص مسالم، كريم، وبتحب الخير للكل.' }
       ],
       quote: '🐸 "أنت غالباً بتكلم الزرع والقطط في الشارع وهم بيردوا عليك"'
     },
     black: {
       name: 'الأسود', emoji: '🎩', clickEmoji: '🦇', class: 'c-black',
-      link: 'https://www.google.com/search?q=سيكولوجية+اللون+الأسود',
+      link: 'https://mawdoo3.com/%D8%AF%D9%84%D8%A7%D9%84%D8%A9_%D8%A7%D9%84%D9%84%D9%88%D9%86_%D8%A7%D9%84%D8%A3%D8%B3%D9%88%D8%AF',
       points: [
-        { icon: '⚫', text: 'يرمز للقوة، الأناقة، والغموض.' },
-        { icon: '🕶️', text: 'يعكس الاستقلالية التامة والجاذبية العميقة.' },
-        { icon: '♟️', text: 'يدل على شخصية ذات إرادة قوية وتحب الخصوصية.' }
+        { icon: '⚫', text: 'رمز القوة، الشياكة، والغموض اللي بجد.' },
+        { icon: '🕶️', text: 'بيعكس استقلاليتك وجاذبيتك اللي ملهاش حل.' },
+        { icon: '♟️', text: 'بيدل إنك شخص دماغك ناشفة وبتحب خصوصيتك جداً.' }
       ],
       quote: '🖤 "فاكر نفسك البطل الغامض في الفيلم.. وأنت فعلاً كدا"'
     }
   };
 
-  // إنشاء الجزيئات العائمة
+  // الجزيئات
   const pColors = ['#ff7675','#74b9ff','#ffeaa7','#55efc4','#ffffff'];
   const pWrap = document.getElementById('particles-container');
   for (let i = 0; i < 35; i++) {
@@ -382,10 +366,7 @@
   function go(key) {
     document.querySelectorAll('.page:not(#emailModal)').forEach(p => p.classList.remove('active'));
     const target = document.getElementById(map[key] || key);
-    if (target) {
-      target.classList.add('active');
-      target.scrollTop = 0; 
-    }
+    if (target) { target.classList.add('active'); target.scrollTop = 0; }
 
     const topLogo = document.getElementById('topLogo');
     if (key === 'page1') { topLogo.classList.remove('visible'); } 
@@ -417,17 +398,13 @@
     document.getElementById('singleColorEmoji').textContent = data.emoji;
     document.getElementById('singleColorName').textContent = data.name;
     
-    // بناء محتوى النقاط والروابط
     let htmlContent = '<ul class="color-points">';
-    data.points.forEach(p => {
-      htmlContent += `<li><span>${p.icon}</span> ${p.text}</li>`;
-    });
+    data.points.forEach(p => { htmlContent += `<li><span>${p.icon}</span> ${p.text}</li>`; });
     htmlContent += '</ul>';
     htmlContent += `<span class="funny-quote">${data.quote}</span>`;
-    htmlContent += `<a href="${data.link}" target="_blank" class="external-link">🔗 للمزيد عن سيكولوجية اللون</a>`;
+    htmlContent += `<a href="${data.link}" target="_blank" class="external-link">🔗 شوف دلالة لونك بالتفصيل من هنا</a>`;
 
     document.getElementById('singleColorContent').innerHTML = htmlContent;
-
     setTimeout(() => go('page5'), 350);
   }
 
