@@ -167,6 +167,22 @@
   .external-link:hover { background: rgba(255, 255, 255, 0.4); transform: scale(1.05); color: #fff; }
 
   /* ══════════════════════════════════
+     تخصيص الكارت الأصفر (نصوص غامقة)
+  ══════════════════════════════════ */
+  .c-yellow .single-color-name { color: #2d3436; text-shadow: none; }
+  .c-yellow .close-btn { color: #2d3436; }
+  .c-yellow .close-btn:hover { color: #000; }
+  .c-yellow .color-points li {
+    color: #2d3436; background: rgba(0, 0, 0, 0.08);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.03);
+  }
+  .c-yellow .funny-quote { color: #d63031; text-shadow: none; font-weight: 900; }
+  .c-yellow .external-link {
+    color: #2d3436; border-color: rgba(0, 0, 0, 0.3); background: rgba(0, 0, 0, 0.05);
+  }
+  .c-yellow .external-link:hover { background: rgba(0, 0, 0, 0.15); color: #000; }
+
+  /* ══════════════════════════════════
      كارت الإيميل
   ══════════════════════════════════ */
   .email-card {
@@ -290,11 +306,11 @@
 </div>
 
 <script>
-  // البيانات بالعامية المصرية مع لينكات حقيقية من موقع "موضوع"
+  // البيانات بالعامية المصرية مع لينكات أجنبية موثوقة (Verywell Mind)
   const colorData = {
     red: {
       name: 'الأحمر', emoji: '🔥', clickEmoji: '🧨', class: 'c-red',
-      link: 'https://mawdoo3.com/%D8%AF%D9%84%D8%A7%D9%84%D8%A9_%D8%A7%D9%84%D9%84%D9%88%D9%86_%D8%A7%D9%84%D8%A3%D8%AD%D9%85%D8%B1',
+      link: 'https://www.verywellmind.com/the-color-psychology-of-red-2795821',
       points: [
         { icon: '🔴', text: 'كله طاقة وحماس وشغف ملوش حدود.' },
         { icon: '🚀', text: 'لون بيخطف العين ويلفت الانتباه في ثانية.' },
@@ -304,7 +320,7 @@
     },
     blue: {
       name: 'الأزرق', emoji: '🌊', clickEmoji: '💎', class: 'c-blue',
-      link: 'https://mawdoo3.com/%D8%AF%D9%84%D8%A7%D9%84%D8%A9_%D8%A7%D9%84%D9%84%D9%88%D9%86_%D8%A7%D9%84%D8%A3%D8%B2%D8%B1%D9%82',
+      link: 'https://www.verywellmind.com/the-color-psychology-of-blue-2795815',
       points: [
         { icon: '🔵', text: 'بيعبر عن الهدوء والثقة والاحترافية في التعامل.' },
         { icon: '🧠', text: 'لون العقل والسلام الداخلي والروقان.' },
@@ -314,7 +330,7 @@
     },
     yellow: {
       name: 'الأصفر', emoji: '💡', clickEmoji: '☀️', class: 'c-yellow',
-      link: 'https://mawdoo3.com/%D8%AF%D9%84%D8%A7%D9%84%D8%A9_%D8%A7%D9%84%D9%84%D9%88%D9%86_%D8%A7%D9%84%D8%A3%D8%B5%D9%81%D8%B1',
+      link: 'https://www.verywellmind.com/the-color-psychology-of-yellow-2795823',
       points: [
         { icon: '🟡', text: 'لون الفرفشة والسعادة والتفاؤل اللي بجد.' },
         { icon: '⚡', text: 'بيشغل الدماغ ويخليك مركز ومصحصح.' },
@@ -324,7 +340,7 @@
     },
     green: {
       name: 'الأخضر', emoji: '🌿', clickEmoji: '🍀', class: 'c-green',
-      link: 'https://mawdoo3.com/%D8%AF%D9%84%D8%A7%D9%84%D8%A9_%D8%A7%D9%84%D9%84%D9%88%D9%86_%D8%A7%D9%84%D8%A3%D8%AE%D8%B6%D8%B1',
+      link: 'https://www.verywellmind.com/color-psychology-green-2795817',
       points: [
         { icon: '🟢', text: 'لون الطبيعة والنمو والتوازن النفسي التمام.' },
         { icon: '🧘‍♂️', text: 'بيهدي الأعصاب وبيجيب الراحة والطمأنينة.' },
@@ -334,7 +350,7 @@
     },
     black: {
       name: 'الأسود', emoji: '🎩', clickEmoji: '🦇', class: 'c-black',
-      link: 'https://mawdoo3.com/%D8%AF%D9%84%D8%A7%D9%84%D8%A9_%D8%A7%D9%84%D9%84%D9%88%D9%86_%D8%A7%D9%84%D8%A3%D8%B3%D9%88%D8%AF',
+      link: 'https://www.verywellmind.com/the-color-psychology-of-black-2795814',
       points: [
         { icon: '⚫', text: 'رمز القوة، الشياكة، والغموض اللي بجد.' },
         { icon: '🕶️', text: 'بيعكس استقلاليتك وجاذبيتك اللي ملهاش حل.' },
