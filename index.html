@@ -1,431 +1,797 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>The Hidden Power of Colors - Spark Team</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Marhey:wght@400;700&display=swap" rel="stylesheet"/>
-<style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Hidden Power of Colors - Spark Team Quiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Marhey:wght@400;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  html, body {
-    width: 100%; height: 100%;
-    font-family: 'Cairo', sans-serif;
-    background-color: #f4f6f9;
-    overflow: hidden;
-    color: #333;
-  }
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      font-family: 'Cairo', sans-serif;
+      background-color: #f4f6f9;
+      overflow: hidden;
+      color: #333;
+    }
 
-  /* ══════════════════════════════════
-     الخلفية المتحركة
-  ══════════════════════════════════ */
-  .bg-shapes {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 0; overflow: hidden; pointer-events: none;
-  }
-  .shape {
-    position: absolute; border-radius: 50%; filter: blur(50px);
-    opacity: 0.6; animation: floatShape 10s infinite alternate ease-in-out;
-  }
-  .shape-red { background: #ff7675; width: 40vw; height: 40vw; top: -10%; right: -10%; }
-  .shape-blue { background: #74b9ff; width: 35vw; height: 35vw; bottom: -10%; left: -10%; animation-delay: -3s; }
-  .shape-yellow { background: #fbcd35; width: 30vw; height: 30vw; top: 40%; left: 20%; animation-delay: -6s; }
-  .shape-green { background: #55efc4; width: 25vw; height: 25vw; bottom: 20%; right: 20%; animation-delay: -9s; }
-  
-  @keyframes floatShape {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(40px, -40px) scale(1.1); }
-  }
+    /* ══════════════════════════════════
+       الخلفية المتحركة والجزيئات (الفقاعات)
+    ══════════════════════════════════ */
+    .bg-shapes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
 
-  .particle {
-    position: fixed; border-radius: 50%; pointer-events: none; opacity: 0;
-    z-index: 1; animation: floatUp var(--d) var(--delay) ease-in-out infinite;
-  }
-  @keyframes floatUp { 
-    0% { transform: translateY(105vh) scale(0.5); opacity: 0; } 
-    20% { opacity: 0.7; } 
-    100% { transform: translateY(-10vh) scale(1.2); opacity: 0; } 
-  }
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(50px);
+      opacity: 0.6;
+      animation: floatShape 10s infinite alternate ease-in-out;
+    }
 
-  /* ══════════════════════════════════
-     اللوجو
-  ══════════════════════════════════ */
-  .big-logo {
-    width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15); margin-bottom: 20px;
-    cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 4px solid white; position: relative; z-index: 15;
-  }
-  .big-logo:hover { transform: scale(1.05); box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
+    .shape-red {
+      background: #ff7675;
+      width: 40vw;
+      height: 40vw;
+      top: -10%;
+      right: -10%;
+    }
 
-  .top-logo {
-    position: fixed; top: 20px; right: 20px; width: 60px; height: 60px;
-    border-radius: 50%; object-fit: cover; z-index: 1000;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15); cursor: pointer;
-    transition: all 0.4s ease; border: 2px solid white;
-    opacity: 0; visibility: hidden; transform: translateY(-20px);
-  }
-  .top-logo.visible { opacity: 1; visibility: visible; transform: translateY(0); }
-  .top-logo:hover { transform: scale(1.1); }
+    .shape-blue {
+      background: #74b9ff;
+      width: 35vw;
+      height: 35vw;
+      bottom: -10%;
+      left: -10%;
+      animation-delay: -3s;
+    }
 
-  /* ══════════════════════════════════
-     تنسيق الصفحات والبطاقات
-  ══════════════════════════════════ */
-  .page {
-    position: fixed; inset: 0; display: flex; z-index: 10;
-    opacity: 0; pointer-events: none; transition: opacity 0.5s ease, transform 0.5s ease;
-    transform: scale(0.95); overflow-y: auto;
-  }
-  .page.active { opacity: 1; pointer-events: all; transform: scale(1); }
+    .shape-yellow {
+      background: #fbcd35;
+      width: 30vw;
+      height: 30vw;
+      top: 40%;
+      left: 20%;
+      animation-delay: -6s;
+    }
 
-  .page-content {
-    margin: auto; padding: 30px 20px; width: 100%;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-  }
+    .shape-green {
+      background: #55efc4;
+      width: 25vw;
+      height: 25vw;
+      bottom: 20%;
+      right: 20%;
+      animation-delay: -9s;
+    }
 
-  .glass-box {
-    background: rgba(255, 255, 255, 0.85); border-radius: 25px; padding: 40px;
-    text-align: center; width: min(550px, 92vw); box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-    backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.6);
-  }
+    @keyframes floatShape {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
 
-  .box-title { font-family: 'Marhey', cursive; font-size: clamp(1.6rem, 5vw, 2.2rem); line-height: 1.5; margin-bottom: 15px; color: #2d3436; }
-  .color-word { color: #0984e3; font-weight: 900; }
-  .box-sub { color: #636e72; font-size: 1.1rem; margin-bottom: 30px; font-weight: 700; }
+      100% {
+        transform: translate(40px, -40px) scale(1.1);
+      }
+    }
 
-  .btn-row { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
-  .btn {
-    font-family: 'Marhey', cursive; font-size: 1.3rem; padding: 10px 30px;
-    border: none; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; font-weight: 700;
-  }
-  .btn-yes { background-color: #00b894; color: white; box-shadow: 0 8px 20px rgba(0, 184, 148, 0.3); }
-  .btn-yes:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(0, 184, 148, 0.5); }
-  .btn-no { background-color: #d63031; color: white; box-shadow: 0 8px 20px rgba(214, 48, 49, 0.3); }
-  .btn-no:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(214, 48, 49, 0.5); }
+    .particle {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 1;
+      animation: floatUp var(--d) var(--delay) ease-in-out infinite;
+    }
 
-  /* ══════════════════════════════════
-     اختيار الألوان
-  ══════════════════════════════════ */
-  .reward-title { font-family: 'Marhey', cursive; font-size: clamp(2rem, 6vw, 3rem); color: #2d3436; margin-bottom: 5px; text-align: center; }
-  .reward-sub { color: #636e72; font-size: 1.2rem; margin-bottom: 25px; text-align: center; font-weight: bold; }
+    @keyframes floatUp {
+      0% {
+        transform: translateY(105vh) scale(0.5);
+        opacity: 0;
+      }
 
-  .color-grid {
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; max-width: 480px; margin: 0 auto 25px auto;
-  }
-  .color-cell {
-    border-radius: 20px; padding: 20px 10px; width: 135px; cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-  }
-  .color-cell:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+      20% {
+        opacity: 0.7;
+      }
 
-  .cell-emoji { font-size: 3.5rem; margin-bottom: 5px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); animation: emojiBounce 2s ease-in-out infinite; }
-  .cell-name { font-size: 1.3rem; font-weight: 900; color: #fff; text-shadow: 1px 1px 3px rgba(0,0,0,0.4); }
+      100% {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+      }
+    }
 
-  .c-red    { background: linear-gradient(135deg, #ff7675, #d63031); }
-  .c-blue   { background: linear-gradient(135deg, #74b9ff, #0984e3); }
-  .c-yellow { background: linear-gradient(135deg, #fbcd35, #fdcb6e); }
-  .c-green  { background: linear-gradient(135deg, #55efc4, #00b894); }
-  .c-black  { background: linear-gradient(135deg, #636e72, #2d3436); }
+    /* ══════════════════════════════════
+       اللوجو
+    ══════════════════════════════════ */
+    .big-logo {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 4px solid white;
+      position: relative;
+      z-index: 15;
+    }
 
-  /* ══════════════════════════════════
-     شاشة عرض نتيجة اللون
-  ══════════════════════════════════ */
-  .modal-overlay { cursor: pointer; background: rgba(255,255,255,0.4); backdrop-filter: blur(5px); }
+    .big-logo:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
 
-  .single-color-card {
-    border-radius: 25px; padding: 40px 30px; text-align: center; max-width: 550px; width: 95vw;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2); position: relative; cursor: default;
-  }
-  
-  .close-btn {
-    position: absolute; top: 15px; left: 20px; font-size: 2rem; color: rgba(255,255,255,0.8);
-    cursor: pointer; transition: all 0.3s ease; z-index: 20; line-height: 1;
-  }
-  .close-btn:hover { color: #fff; transform: scale(1.2) rotate(90deg); }
+    .top-logo {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      z-index: 1000;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      transition: all 0.4s ease;
+      border: 2px solid white;
+    }
 
-  .single-color-emoji { font-size: 5rem; margin-bottom: 10px; animation: emojiBounce 2s infinite; }
-  .single-color-name { font-family: 'Marhey', cursive; font-size: 2.5rem; color: #fff; text-shadow: 2px 2px 10px rgba(0,0,0,0.2); margin-bottom: 20px; }
-  
-  .color-points { list-style: none; padding: 0; margin: 0 0 15px 0; text-align: right; }
-  .color-points li {
-    font-size: 1.1rem; color: #fff; background: rgba(0, 0, 0, 0.15);
-    padding: 12px 15px; margin-bottom: 10px; border-radius: 12px;
-    box-shadow: inset 0 0 10px rgba(255,255,255,0.05); display: flex; align-items: center;
-    font-weight: 700;
-  }
-  .color-points li span { margin-left: 10px; font-size: 1.3rem; }
+    .top-logo:hover {
+      transform: scale(1.1);
+    }
 
-  .funny-quote { display: block; margin-top: 15px; color: #ffeaa7; font-family: 'Marhey', cursive; font-size: 1.1rem; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); }
+    /* ══════════════════════════════════
+       الصفحات
+    ══════════════════════════════════ */
+    .page {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      z-index: 10;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.5s ease;
+      transform: scale(0.95);
+      overflow-y: auto;
+    }
 
-  .external-link {
-    display: inline-block; margin-top: 20px; padding: 10px 25px;
-    background: rgba(255, 255, 255, 0.2); color: white; text-decoration: none;
-    border-radius: 50px; font-family: 'Marhey', cursive; font-size: 1.1rem;
-    transition: all 0.3s; border: 1px solid rgba(255, 255, 255, 0.4);
-  }
-  .external-link:hover { background: rgba(255, 255, 255, 0.4); transform: scale(1.05); color: #fff; }
+    .page.active {
+      opacity: 1;
+      pointer-events: all;
+      transform: scale(1);
+    }
 
-  /* ══════════════════════════════════
-     تخصيص الكارت الأصفر (نصوص غامقة)
-  ══════════════════════════════════ */
-  .c-yellow .single-color-name { color: #2d3436; text-shadow: none; }
-  .c-yellow .close-btn { color: #2d3436; }
-  .c-yellow .close-btn:hover { color: #000; }
-  .c-yellow .color-points li {
-    color: #2d3436; background: rgba(0, 0, 0, 0.08);
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.03);
-  }
-  .c-yellow .funny-quote { color: #d63031; text-shadow: none; font-weight: 900; }
-  .c-yellow .external-link {
-    color: #2d3436; border-color: rgba(0, 0, 0, 0.3); background: rgba(0, 0, 0, 0.05);
-  }
-  .c-yellow .external-link:hover { background: rgba(0, 0, 0, 0.15); color: #000; }
+    .page-content {
+      margin: auto;
+      padding: 30px 20px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
 
-  /* ══════════════════════════════════
-     كارت الإيميل
-  ══════════════════════════════════ */
-  .email-card {
-    background: rgba(255, 255, 255, 0.95); border-radius: 25px; padding: 40px 20px; text-align: center;
-    max-width: 400px; width: 90vw; box-shadow: 0 20px 50px rgba(0,0,0,0.15); position: relative; cursor: default;
-  }
-  .close-btn-dark { color: #888; }
-  .close-btn-dark:hover { color: #d63031; }
-  .email-icon { font-size: 4rem; margin-bottom: 15px; animation: emojiBounce 2s infinite; }
-  .email-title { font-family: 'Marhey', cursive; font-size: 2rem; color: #2d3436; margin-bottom: 10px; }
-  .email-address { font-size: 1.2rem; font-weight: 900; color: #0984e3; background: #f0f8ff; padding: 10px 15px; border-radius: 10px; word-break: break-all;}
+    .glass-box {
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 25px;
+      padding: 40px;
+      text-align: center;
+      width: min(550px, 92vw);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      position: relative;
+    }
 
-  /* ══════════════════════════════════
-     تأثيرات
-  ══════════════════════════════════ */
-  .click-emoji { position: fixed; font-size: 3rem; pointer-events: none; z-index: 9999; animation: clickBurst 1s ease-out forwards; }
-  @keyframes clickBurst { 0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 1; } 40% { transform: translate(-50%, -50%) scale(1.5) rotate(15deg); opacity: 1; } 100% { transform: translate(-50%, calc(-50% - 150px)) scale(0.5) rotate(-20deg); opacity: 0; } }
-  @keyframes emojiBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    .box-title {
+      font-family: 'Marhey', cursive;
+      font-size: clamp(1.6rem, 5vw, 2.2rem);
+      margin-bottom: 15px;
+      color: #2d3436;
+      line-height: 1.4;
+    }
 
-  @media (max-width: 600px) {
-    .color-cell { width: 110px; padding: 15px 5px; } .color-grid { gap: 10px; } .cell-emoji { font-size: 3rem; }
-    .single-color-name { font-size: 2rem; margin-bottom: 15px; }
-    .glass-box { padding: 30px 20px; } .big-logo { width: 130px; height: 130px; }
-    .color-points li { font-size: 1rem; padding: 10px; }
-  }
-</style>
+    /* الفورم والمدخلات */
+    .input-group {
+      margin-bottom: 20px;
+      text-align: right;
+    }
+
+    .input-group label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+      color: #636e72;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 10px;
+      border: 2px solid #dfe6e9;
+      font-family: 'Cairo', sans-serif;
+      font-size: 1rem;
+      outline: none;
+      transition: border 0.3s;
+    }
+
+    .input-field:focus {
+      border-color: #0984e3;
+    }
+
+    .btn-theme {
+      font-family: 'Marhey', cursive;
+      font-size: 1.3rem;
+      padding: 10px 30px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 700;
+      width: 100%;
+      margin-top: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-theme:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-error {
+      background-color: #d63031;
+      color: white;
+      margin-top: 20px;
+    }
+
+    /* الكويز */
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .quiz-option {
+      background: white;
+      border: 2px solid #dfe6e9;
+      padding: 15px;
+      border-radius: 12px;
+      cursor: pointer;
+      text-align: right;
+      font-weight: bold;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+    }
+
+    .quiz-option:hover {
+      border-color: var(--dynamic-color, #0984e3);
+      background: #f8f9fa;
+    }
+
+    .quiz-option input {
+      margin-left: 10px;
+      transform: scale(1.2);
+    }
+
+    .team-badge {
+      font-size: 5rem;
+      margin: 10px 0;
+      animation: emojiBounce 2s infinite;
+    }
+
+    .loader {
+      display: none;
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    /* ══════════════════════════════════
+       كارت تفاصيل اللون (النهائي)
+    ══════════════════════════════════ */
+    .single-color-card {
+      border-radius: 25px;
+      padding: 40px 30px;
+      text-align: center;
+      max-width: 550px;
+      width: 95vw;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+      position: relative;
+      cursor: default;
+    }
+
+    .single-color-emoji {
+      font-size: 5rem;
+      margin-bottom: 10px;
+      animation: emojiBounce 2s infinite;
+    }
+
+    .single-color-name {
+      font-family: 'Marhey', cursive;
+      font-size: 2.5rem;
+      color: #fff;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+      margin-bottom: 20px;
+    }
+
+    .color-points {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 15px 0;
+      text-align: right;
+    }
+
+    .color-points li {
+      font-size: 1.1rem;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.15);
+      padding: 12px 15px;
+      margin-bottom: 10px;
+      border-radius: 12px;
+      box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+    }
+
+    .color-points li span {
+      margin-left: 10px;
+      font-size: 1.3rem;
+    }
+
+    .funny-quote {
+      display: block;
+      margin-top: 15px;
+      color: #ffeaa7;
+      font-family: 'Marhey', cursive;
+      font-size: 1.1rem;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .external-link {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 25px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-family: 'Marhey', cursive;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .external-link:hover {
+      background: rgba(255, 255, 255, 0.4);
+      transform: scale(1.05);
+      color: #fff;
+    }
+
+    .already-registered-badge {
+      background: #ffeaa7;
+      color: #2d3436;
+      padding: 8px 15px;
+      border-radius: 15px;
+      font-weight: 900;
+      margin-bottom: 20px;
+      display: none;
+      font-size: 1.1rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      border: 2px solid #fdcb6e;
+    }
+
+    /* ══════════════════════════════════
+       نافذة الإيميل
+    ══════════════════════════════════ */
+    .modal-overlay {
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(5px);
+      z-index: 10000;
+    }
+
+    .email-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 25px;
+      padding: 40px 20px;
+      text-align: center;
+      max-width: 400px;
+      width: 90vw;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      position: relative;
+      cursor: default;
+    }
+
+    .close-btn-dark {
+      color: #888;
+      position: absolute;
+      top: 15px;
+      left: 20px;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      line-height: 1;
+    }
+
+    .close-btn-dark:hover {
+      color: #d63031;
+      transform: scale(1.2) rotate(90deg);
+    }
+
+    .email-icon {
+      font-size: 4rem;
+      margin-bottom: 15px;
+      animation: emojiBounce 2s infinite;
+    }
+
+    .email-title {
+      font-family: 'Marhey', cursive;
+      font-size: 2rem;
+      color: #2d3436;
+      margin-bottom: 10px;
+    }
+
+    /* زر الإيميل اللي بيفتح الـ Gmail */
+    .email-address {
+      display: inline-block;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: #0984e3;
+      background: #f0f8ff;
+      padding: 10px 15px;
+      border-radius: 10px;
+      word-break: break-all;
+      transition: 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .email-address:hover {
+      background: #0984e3;
+      color: white;
+      border-color: #0984e3;
+      transform: scale(1.05);
+    }
+
+    /* تدرجات الألوان */
+    .c-red {
+      background: linear-gradient(135deg, #ff7675, #d63031);
+    }
+
+    .c-blue {
+      background: linear-gradient(135deg, #74b9ff, #0984e3);
+    }
+
+    .c-yellow {
+      background: linear-gradient(135deg, #fbcd35, #fdcb6e);
+    }
+
+    .c-green {
+      background: linear-gradient(135deg, #55efc4, #00b894);
+    }
+
+    .c-black {
+      background: linear-gradient(135deg, #636e72, #2d3436);
+    }
+
+    /* تخصيص الأصفر */
+    .c-yellow .single-color-name {
+      color: #2d3436;
+      text-shadow: none;
+    }
+
+    .c-yellow .color-points li {
+      color: #2d3436;
+      background: rgba(0, 0, 0, 0.08);
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.03);
+    }
+
+    .c-yellow .funny-quote {
+      color: #d63031;
+      text-shadow: none;
+      font-weight: 900;
+    }
+
+    .c-yellow .external-link {
+      color: #2d3436;
+      border-color: rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .c-yellow .external-link:hover {
+      background: rgba(0, 0, 0, 0.15);
+      color: #000;
+    }
+
+    @keyframes emojiBounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="bg-shapes">
+  <div class="bg-shapes">
     <div class="shape shape-red"></div>
     <div class="shape shape-blue"></div>
     <div class="shape shape-yellow"></div>
     <div class="shape shape-green"></div>
-</div>
-<div id="particles-container" style="position: fixed; inset: 0; pointer-events: none; z-index: 1;"></div>
+  </div>
+  <div id="particles-container" style="position: fixed; inset: 0; pointer-events: none; z-index: 1;"></div>
 
-<img src="image_0345b5.png" alt="Spark Logo" id="topLogo" class="top-logo" onclick="openEmail()">
+  <img src="logo.png" alt="Spark Logo" id="topLogo" class="top-logo" onclick="openEmail()" title="تواصل معنا">
 
-<!-- الشاشة الأولى -->
-<div class="page active" id="page1">
-  <div class="page-content">
-    <div class="glass-box">
-      <img src="image_0345b5.png" alt="Spark Logo" class="big-logo" onclick="openEmail()" title="اضغط عشان تكلمنا">
-      <h1 class="box-title">رسيت على <span class="color-word">لون معين</span> في دماغك دلوقتي؟ 🤔</h1>
-      <p class="box-sub">عقلك الباطن قرر خلاص.. جاهز تكتشف السر؟ 👀</p>
-      <div class="btn-row">
-        <button class="btn btn-yes" onclick="go('reward')">أيوة، جاهز! ✌️</button>
-        <button class="btn btn-no" onclick="go('think')">لأ لسه بفكر 🤔</button>
+  <div class="page" id="page-error">
+    <div class="page-content">
+      <div class="glass-box">
+        <div style="font-size: 5rem; margin-bottom: 10px;">⚠️</div>
+        <h1 class="box-title">عذراً، الكود غير مكتمل!</h1>
+        <p style="color: #636e72; font-size: 1.1rem; margin-bottom: 20px;">اللينك ده ناقص لون الفريق. أرجوك افتح
+          الكاميرا واعمل سكان للـ QR Code اللي في الورقة بتاعتك مرة تانية.</p>
+        <button class="btn-theme btn-error" onclick="window.location.reload()">إعادة تحميل 🔄</button>
       </div>
     </div>
   </div>
-</div>
 
-<!-- الشاشة التانية -->
-<div class="page" id="page2">
-  <div class="page-content">
-    <div class="glass-box">
-      <h1 class="box-title">روح فكر بسرعة وتعالى! 🏃‍♂️</h1>
-      <p class="box-sub">الألوان مستنياك.. متتأخرش علينا ⏳</p>
-      <div class="btn-row">
-        <button class="btn btn-yes" onclick="go('reward')">خلاص جبت اللون</button>
+  <div class="page" id="page-login">
+    <div class="page-content">
+      <div class="glass-box">
+        <img src="logo.png" alt="Spark Logo" class="big-logo" onclick="openEmail()" title="اضغط عشان تكلمنا">
+        <h1 class="box-title">مستعد للتحدي؟ 🎯</h1>
+        <p style="color: #636e72; margin-bottom: 25px;">دخل بياناتك عشان تشارك في سحب الجوايز الخاص بـ SPARK</p>
+        <div class="input-group">
+          <label>الاسم بالكامل:</label>
+          <input type="text" id="userName" class="input-field" placeholder="مثال: عبدالله محمد">
+        </div>
+        <div class="input-group">
+          <label>الكود بتاعك (أو الموبايل):</label>
+          <input type="text" id="userCode" class="input-field" placeholder="دخل الكود هنا">
+        </div>
+        <button class="btn-theme dynamic-bg dynamic-text" onclick="saveData()">يلا نبدأ 🚀</button>
       </div>
     </div>
   </div>
-</div>
 
-<!-- الشاشة الثالثة -->
-<div class="page" id="page4">
-  <div class="page-content">
-    <div style="position: relative; z-index: 2; text-align: center; width: 100%;">
-      <div class="reward-title">لونك طلع إيه؟ 🎨</div>
-      <p class="reward-sub">دوس على اللون اللي فكرت فيه عشان تعرف شخصيتك</p>
-      
-      <div class="color-grid">
-        <div class="color-cell c-red" onclick="showColor('red', event)">
-          <div class="cell-emoji">🔥</div><div class="cell-name">الأحمر</div>
-        </div>
-        <div class="color-cell c-blue" onclick="showColor('blue', event)">
-          <div class="cell-emoji">🌊</div><div class="cell-name">الأزرق</div>
-        </div>
-        <div class="color-cell c-yellow" onclick="showColor('yellow', event)">
-          <div class="cell-emoji">☀️</div><div class="cell-name">الأصفر</div>
-        </div>
-        <div class="color-cell c-green" onclick="showColor('green', event)">
-          <div class="cell-emoji">🌿</div><div class="cell-name">الأخضر</div>
-        </div>
-        <div class="color-cell c-black" onclick="showColor('black', event)">
-          <div class="cell-emoji">🎩</div><div class="cell-name">الأسود</div>
-        </div>
+  <div class="page" id="page-color">
+    <div class="page-content">
+      <div class="glass-box">
+        <h1 class="box-title">أنت في فريق اللون...</h1>
+        <div class="team-badge" id="teamEmoji">🎨</div>
+        <h2 id="teamName" style="font-size: 2.5rem; font-weight: 900; margin-bottom: 20px;" class="dynamic-text-color">
+          ...</h2>
+        <p style="color: #636e72; margin-bottom: 20px; font-weight: bold;">ركز كويس جداً في كلام البريزنتيشن، عشان
+          السؤال الجاي بيعتمد على قوة ملاحظتك!</p>
+        <button class="btn-theme dynamic-bg dynamic-text" onclick="go('page-quiz')">جاهز للسؤال 💡</button>
       </div>
-      
-      <button class="btn" style="background: #e2e8f0; color: #2d3436;" onclick="go('page1')">↺ أرجع من الأول</button>
     </div>
   </div>
-</div>
 
-<!-- الشاشة الرابعة -->
-<div class="page modal-overlay" id="page5" onclick="go('reward')">
-  <div class="page-content">
-    <div class="single-color-card" id="singleColorCard" onclick="event.stopPropagation()">
-      <span class="close-btn" onclick="go('reward')">✖</span>
-      <div class="single-color-emoji" id="singleColorEmoji">🎨</div>
-      <div class="single-color-name" id="singleColorName">اللون</div>
-      <div id="singleColorContent"></div>
+  <div class="page" id="page-quiz">
+    <div class="page-content">
+      <div class="glass-box">
+        <h1 class="box-title">سؤال السرعة! ⏱️</h1>
+        <p id="quizQuestionText" style="font-size: 1.3rem; font-weight: 900; color: #2d3436; margin-top: 15px;"></p>
+
+        <div class="quiz-options" id="quizOptionsContainer">
+        </div>
+
+        <button class="btn-theme dynamic-bg dynamic-text" id="submitBtn" onclick="submitQuiz()"
+          style="margin-top: 25px;">إرسال الإجابة 🚀</button>
+        <div id="loader" class="loader dynamic-text-color">جاري الحفظ في السيستم... ⏳</div>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- شاشة الإيميل -->
-<div class="page modal-overlay" id="emailModal" onclick="closeEmail()">
-  <div class="page-content">
-    <div class="email-card" onclick="event.stopPropagation()">
-      <span class="close-btn close-btn-dark" onclick="closeEmail()">✖</span>
-      <div class="email-icon">📬</div>
-      <h2 class="email-title">كلمنا</h2>
-      <p style="color: #636e72; margin-bottom: 15px;">فريق Spark دايماً معاك، ابعتلنا في أي وقت!</p>
-      <div class="email-address">spark.team.asu@gmail.com</div>
+  <div class="page" id="page-final">
+    <div class="page-content">
+      <div class="single-color-card" id="finalCard">
+        <div id="alreadyRegisteredBadge" class="already-registered-badge">✨ لقد قمت بتسجيل إجابتك مسبقاً! ✨</div>
+        <div class="single-color-emoji" id="finalEmoji">🎨</div>
+        <div class="single-color-name" id="finalName">اللون</div>
+        <div id="finalContent"></div>
+      </div>
     </div>
   </div>
-</div>
 
-<script>
-  // البيانات بالعامية المصرية مع لينكات أجنبية موثوقة (Verywell Mind)
-  const colorData = {
-    red: {
-      name: 'الأحمر', emoji: '🔥', clickEmoji: '🧨', class: 'c-red',
-      link: 'https://www.verywellmind.com/the-color-psychology-of-red-2795821',
-      points: [
-        { icon: '🔴', text: 'كله طاقة وحماس وشغف ملوش حدود.' },
-        { icon: '🚀', text: 'لون بيخطف العين ويلفت الانتباه في ثانية.' },
-        { icon: '🎯', text: 'بيدل إنك شخص مبادر ومبيهمكش تبقى في الصورة.' }
-      ],
-      quote: '🥊 "أنت غالباً بتحب الأكشن وممكن تتخانق مع دبان وشك"'
-    },
-    blue: {
-      name: 'الأزرق', emoji: '🌊', clickEmoji: '💎', class: 'c-blue',
-      link: 'https://www.verywellmind.com/the-color-psychology-of-blue-2795815',
-      points: [
-        { icon: '🔵', text: 'بيعبر عن الهدوء والثقة والاحترافية في التعامل.' },
-        { icon: '🧠', text: 'لون العقل والسلام الداخلي والروقان.' },
-        { icon: '🛡️', text: 'بيدل إنك شخص عاقل، راسي، والناس بتثق فيك.' }
-      ],
-      quote: '🥶 "أنت شخص رايق لدرجة تثير الريبة والشك"'
-    },
-    yellow: {
-      name: 'الأصفر', emoji: '☀️', clickEmoji: '☀️', class: 'c-yellow',
-      link: 'https://www.verywellmind.com/the-color-psychology-of-yellow-2795823',
-      points: [
-        { icon: '🟡', text: 'لون الفرفشة والسعادة والتفاؤل اللي بجد.' },
-        { icon: '⚡', text: 'بيشغل الدماغ ويخليك مركز ومصحصح.' },
-        { icon: '🎨', text: 'بيدل إنك شخص بتاع حركة وتجديد ومبتحبش الروتين.' }
-      ],
-      quote: '🤩 "بتضحك وتتفائل كتير لدرجة إن الناس بتقلق عليك"'
-    },
-    green: {
-      name: 'الأخضر', emoji: '🌿', clickEmoji: '🍀', class: 'c-green',
-      link: 'https://www.verywellmind.com/color-psychology-green-2795817',
-      points: [
-        { icon: '🟢', text: 'لون الطبيعة والنمو والتوازن النفسي التمام.' },
-        { icon: '🧘‍♂️', text: 'بيهدي الأعصاب وبيجيب الراحة والطمأنينة.' },
-        { icon: '🤝', text: 'بيدل إنك شخص مسالم، كريم، وبتحب الخير للكل.' }
-      ],
-      quote: '🐸 "أنت غالباً بتكلم الزرع والقطط في الشارع وهم بيردوا عليك"'
-    },
-    black: {
-      name: 'الأسود', emoji: '🎩', clickEmoji: '🦇', class: 'c-black',
-      link: 'https://www.verywellmind.com/the-color-psychology-of-black-2795814',
-      points: [
-        { icon: '⚫', text: 'رمز القوة، الشياكة، والغموض اللي بجد.' },
-        { icon: '🕶️', text: 'بيعكس استقلاليتك وجاذبيتك اللي ملهاش حل.' },
-        { icon: '♟️', text: 'بيدل إنك شخص دماغك ناشفة وبتحب خصوصيتك جداً.' }
-      ],
-      quote: '🖤 "فاكر نفسك البطل الغامض في الفيلم.. وأنت فعلاً كدا"'
-    }
-  };
+  <div class="page modal-overlay" id="emailModal" onclick="closeEmail()">
+    <div class="page-content">
+      <div class="email-card" onclick="event.stopPropagation()">
+        <span class="close-btn-dark" onclick="closeEmail()">✖</span>
+        <div class="email-icon">📬</div>
+        <h2 class="email-title">كلمنا</h2>
+        <p style="color: #636e72; margin-bottom: 15px;">فريق Spark دايماً معاك، ابعتلنا رسالة في أي وقت!</p>
+        <a href="mailto:spark.team.asu@gmail.com" class="email-address">spark.team.asu@gmail.com</a>
+      </div>
+    </div>
+  </div>
 
-  // الجزيئات
-  const pColors = ['#ff7675','#74b9ff','#ffeaa7','#55efc4','#ffffff'];
-  const pWrap = document.getElementById('particles-container');
-  for (let i = 0; i < 35; i++) {
-    const el = document.createElement('div');
-    el.className = 'particle';
-    const s = Math.random() * 12 + 5;
-    el.style.cssText = `
-      width:${s}px; height:${s}px;
-      background:${pColors[Math.floor(Math.random()*pColors.length)]};
-      left:${Math.random()*100}%;
-      --d:${(Math.random()*8+6).toFixed(1)}s;
-      --delay:${(Math.random()*5).toFixed(1)}s;
-    `;
-    pWrap.appendChild(el);
-  }
-
-  const map = { page1:'page1', think:'page2', reward:'page4' };
-  
-  function go(key) {
-    document.querySelectorAll('.page:not(#emailModal)').forEach(p => p.classList.remove('active'));
-    const target = document.getElementById(map[key] || key);
-    if (target) { target.classList.add('active'); target.scrollTop = 0; }
-
-    const topLogo = document.getElementById('topLogo');
-    if (key === 'page1') { topLogo.classList.remove('visible'); } 
-    else { topLogo.classList.add('visible'); }
-  }
-
-  function showColor(colorKey, event) {
-    if(event) event.stopPropagation();
-    const data = colorData[colorKey];
-    if (!data) return;
-
-    if (event) {
-      for (let i = 0; i < 6; i++) {
-        setTimeout(() => {
-          const mini = document.createElement('div');
-          mini.className = 'click-emoji';
-          mini.textContent = data.clickEmoji;
-          mini.style.left = (event.clientX + (Math.random() - 0.5) * 80) + 'px';
-          mini.style.top = (event.clientY + (Math.random() - 0.5) * 80) + 'px';
-          document.body.appendChild(mini);
-          setTimeout(() => mini.remove(), 1000);
-        }, i * 60);
+  <script>
+    // توليد الفقاعات (Particles)
+    function initParticles() {
+      const pColors = ['#ff7675', '#74b9ff', '#ffeaa7', '#55efc4', '#ffffff'];
+      const pWrap = document.getElementById('particles-container');
+      for (let i = 0; i < 35; i++) {
+        const el = document.createElement('div');
+        el.className = 'particle';
+        const s = Math.random() * 12 + 5;
+        el.style.cssText = `
+          width:${s}px; height:${s}px;
+          background:${pColors[Math.floor(Math.random() * pColors.length)]};
+          left:${Math.random() * 100}%;
+          --d:${(Math.random() * 8 + 6).toFixed(1)}s;
+          --delay:${(Math.random() * 5).toFixed(1)}s;
+        `;
+        pWrap.appendChild(el);
       }
     }
 
-    const card = document.getElementById('singleColorCard');
-    card.className = 'single-color-card ' + data.class;
+    // 🔴 حط لينك الـ Web App بتاع جوجل سكريبت هنا 🔴
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzos9Cw-KSQ2UyIcoUoqgMNH0ZlQwdqFzCHrl2-HKxbNDGkILPcqiQM0D-anidNXIdC-g/exec';
 
-    document.getElementById('singleColorEmoji').textContent = data.emoji;
-    document.getElementById('singleColorName').textContent = data.name;
-    
-    let htmlContent = '<ul class="color-points">';
-    data.points.forEach(p => { htmlContent += `<li><span>${p.icon}</span> ${p.text}</li>`; });
-    htmlContent += '</ul>';
-    htmlContent += `<span class="funny-quote">${data.quote}</span>`;
-    htmlContent += `<a href="${data.link}" target="_blank" class="external-link">🔗 شوف دلالة لونك بالتفصيل من هنا</a>`;
+    const colorData = {
+      red: { name: 'الأحمر', colorHex: '#d63031', emoji: '🔥', class: 'c-red', link: 'https://www.verywellmind.com/the-color-psychology-of-red-2795821', points: [{ icon: '🔴', text: 'كله طاقة وحماس وشغف ملوش حدود.' }, { icon: '🚀', text: 'لون بيخطف العين ويلفت الانتباه في ثانية.' }], quote: '🥊 "أنت غالباً بتحب الأكشن وممكن تتخانق مع دبان وشك"' },
+      blue: { name: 'الأزرق', colorHex: '#0984e3', emoji: '🌊', class: 'c-blue', link: 'https://www.verywellmind.com/the-color-psychology-of-blue-2795815', points: [{ icon: '🔵', text: 'بيعبر عن الهدوء والثقة والاحترافية في التعامل.' }, { icon: '🛡️', text: 'بيدل إنك شخص عاقل، راسي، والناس بتثق فيك.' }], quote: '🥶 "أنت شخص رايق لدرجة تثير الريبة والشك"' },
+      yellow: { name: 'الأصفر', colorHex: '#fdcb6e', emoji: '☀️', class: 'c-yellow', link: 'https://www.verywellmind.com/the-color-psychology-of-yellow-2795823', points: [{ icon: '🟡', text: 'لون الفرفشة والسعادة والتفاؤل اللي بجد.' }, { icon: '🎨', text: 'بيدل إنك شخص بتاع حركة وتجديد ومبتحبش الروتين.' }], quote: '🤩 "بتضحك وتتفائل كتير لدرجة إن الناس بتقلق عليك"' },
+      green: { name: 'الأخضر', colorHex: '#00b894', emoji: '🌿', class: 'c-green', link: 'https://www.verywellmind.com/color-psychology-green-2795817', points: [{ icon: '🟢', text: 'لون الطبيعة والنمو والتوازن النفسي التمام.' }, { icon: '🤝', text: 'بيدل إنك شخص مسالم، كريم، وبتحب الخير للكل.' }], quote: '🐸 "أنت غالباً بتكلم الزرع والقطط في الشارع وهم بيردوا عليك"' },
+      black: { name: 'الأسود', colorHex: '#2d3436', emoji: '🎩', class: 'c-black', link: 'https://www.verywellmind.com/the-color-psychology-of-black-2795814', points: [{ icon: '⚫', text: 'رمز القوة، الشياكة، والغموض اللي بجد.' }, { icon: '🕶️', text: 'بيعكس استقلاليتك وجاذبيتك اللي ملهاش حل.' }], quote: '🖤 "فاكر نفسك البطل الغامض في الفيلم.. وأنت فعلاً كدا"' }
+    };
 
-    document.getElementById('singleColorContent').innerHTML = htmlContent;
-    setTimeout(() => go('page5'), 350);
-  }
+    const quizBank = {
+      red: { question: "سؤال اللون الأحمر: من هو الشخص الذي ذكرنا أنه يمثل طاقة اللون الأحمر في الفريق؟", options: ["عبدالله", "أحمد", "يوسف", "مجتبى"], correctAnswer: "يوسف" },
+      blue: { question: "مين من التيم كان لابس جرافتة زرقاء؟", options: ["عبدالله", "مصطفى", "محمد", "أسامة"], correctAnswer: "عبدالله" },
+      yellow: { question: "أي البراندات التالية تم ذكرها كمثال للون الأصفر؟", options: ["ماكدونالدز", "فيسبوك", "ستاربكس", "أبل"], correctAnswer: "ماكدونالدز" },
+      green: { question: "ما هو الشعور الأساسي الذي ينقله اللون الأخضر حسب البريزنتيشن؟", options: ["الغضب", "السلام الداخلي والنمو", "الحزن", "الغموض"], correctAnswer: "السلام الداخلي والنمو" },
+      black: { question: "اللون الأسود في التسويق غالباً يُستخدم للدلالة على...", options: ["السرعة", "الطفولة", "الفخامة والرقي", "الخصومات"], correctAnswer: "الفخامة والرقي" }
+    };
 
-  function openEmail() { document.getElementById('emailModal').classList.add('active'); }
-  function closeEmail() { document.getElementById('emailModal').classList.remove('active'); }
-</script>
+    let userColorKey = window.location.hash.replace('#', '').toLowerCase();
+
+    function go(pageId) {
+      document.querySelectorAll('.page:not(#emailModal)').forEach(p => p.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+    }
+
+    // دوال نافذة الإيميل
+    function openEmail() { document.getElementById('emailModal').classList.add('active'); }
+    function closeEmail() { document.getElementById('emailModal').classList.remove('active'); }
+
+    window.onload = () => {
+      initParticles(); // تشغيل الفقاعات
+
+      if (!colorData[userColorKey] || !quizBank[userColorKey]) {
+        go('page-error');
+        document.getElementById('topLogo').style.display = 'none'; // اخفاء اللوجو في صفحة الخطأ
+        return;
+      }
+
+      const teamInfo = colorData[userColorKey];
+      const textColor = (userColorKey === 'yellow') ? '#2d3436' : '#ffffff';
+
+      document.documentElement.style.setProperty('--dynamic-color', teamInfo.colorHex);
+      document.querySelectorAll('.dynamic-bg').forEach(el => el.style.backgroundColor = teamInfo.colorHex);
+      document.querySelectorAll('.dynamic-text').forEach(el => el.style.color = textColor);
+      document.querySelectorAll('.dynamic-text-color').forEach(el => el.style.color = teamInfo.colorHex);
+
+      if (localStorage.getItem('spark_quiz_done') === 'true' && localStorage.getItem('spark_quiz_color') === userColorKey) {
+        buildFinalCard(true);
+        go('page-final');
+      } else {
+        go('page-login');
+      }
+    };
+
+    function saveData() {
+      const name = document.getElementById('userName').value.trim();
+      const code = document.getElementById('userCode').value.trim();
+
+      if (!name || !code) { alert("أرجوك دخل اسمك والكود عشان تقدر تكمل!"); return; }
+
+      localStorage.setItem('spark_name', name);
+      localStorage.setItem('spark_code', code);
+
+      document.getElementById('teamName').textContent = colorData[userColorKey].name;
+      document.getElementById('teamEmoji').textContent = colorData[userColorKey].emoji;
+
+      const qData = quizBank[userColorKey];
+      document.getElementById('quizQuestionText').textContent = qData.question;
+      let optionsHtml = '';
+      qData.options.forEach(opt => {
+        optionsHtml += `<label class="quiz-option"><input type="radio" name="answer" value="${opt}"> ${opt}</label>`;
+      });
+      document.getElementById('quizOptionsContainer').innerHTML = optionsHtml;
+
+      go('page-color');
+    }
+
+    function submitQuiz() {
+      const selected = document.querySelector('input[name="answer"]:checked');
+      if (!selected) { alert("لازم تختار إجابة الأول!"); return; }
+
+      const userAnswer = selected.value;
+      const qData = quizBank[userColorKey];
+      const evaluation = (userAnswer === qData.correctAnswer) ? "إجابة صحيحة ✅" : "إجابة خاطئة ❌";
+
+      const name = localStorage.getItem('spark_name');
+      const code = localStorage.getItem('spark_code');
+      const colorName = colorData[userColorKey].name;
+
+      document.getElementById('loader').style.display = 'block';
+      document.getElementById('submitBtn').style.display = 'none';
+
+      const formData = new FormData();
+      formData.append('Name', name);
+      formData.append('Code', code);
+      formData.append('Color', colorName);
+      formData.append('UserAnswer', userAnswer);
+      formData.append('Evaluation', evaluation);
+
+      fetch(scriptURL, { method: 'POST', body: formData })
+        .then(res => res.json())
+        .then(data => {
+          if (data.result === 'success') {
+            localStorage.setItem('spark_quiz_done', 'true');
+            localStorage.setItem('spark_quiz_color', userColorKey);
+            document.getElementById('loader').style.display = 'none';
+            buildFinalCard(false);
+            go('page-final');
+          } else { throw new Error('Server Error'); }
+        })
+        .catch(error => {
+          document.getElementById('loader').style.display = 'none';
+          document.getElementById('submitBtn').style.display = 'block';
+          alert("حصلت مشكلة في وصول البيانات! اتأكد من الإنترنت ودوس إرسال مرة تانية.");
+        });
+    }
+
+    function buildFinalCard(isAlreadyRegistered) {
+      const data = colorData[userColorKey];
+      const card = document.getElementById('finalCard');
+      card.className = 'single-color-card ' + data.class;
+
+      if (isAlreadyRegistered) {
+        document.getElementById('alreadyRegisteredBadge').style.display = 'inline-block';
+      }
+
+      document.getElementById('finalEmoji').textContent = data.emoji;
+      document.getElementById('finalName').textContent = data.name;
+
+      let html = '<ul class="color-points">';
+      data.points.forEach(p => { html += `<li><span>${p.icon}</span> ${p.text}</li>`; });
+      html += '</ul>';
+      html += `<span class="funny-quote">${data.quote}</span>`;
+      html += `<a href="${data.link}" target="_blank" class="external-link">🔗 شوف دلالة لونك بالتفصيل</a>`;
+
+      document.getElementById('finalContent').innerHTML = html;
+    }
+  </script>
 </body>
+
 </html>
