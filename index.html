@@ -47,7 +47,7 @@
     }
 
     .shape-red {
-      background: #ff7675;
+      background: #DF0101;
       width: 40vw;
       height: 40vw;
       top: -10%;
@@ -55,7 +55,7 @@
     }
 
     .shape-blue {
-      background: #74b9ff;
+      background: #004EE9;
       width: 35vw;
       height: 35vw;
       bottom: -10%;
@@ -64,7 +64,7 @@
     }
 
     .shape-yellow {
-      background: #fbcd35;
+      background: #EEE300;
       width: 30vw;
       height: 30vw;
       top: 40%;
@@ -73,7 +73,7 @@
     }
 
     .shape-green {
-      background: #55efc4;
+      background: #6DCD39;
       width: 25vw;
       height: 25vw;
       bottom: 20%;
@@ -283,7 +283,7 @@
     }
 
     .quiz-option:hover {
-      border-color: var(--dynamic-color, #0984e3);
+      border-color: var(--dynamic-color, #004EE9);
       background: #f8f9fa;
     }
 
@@ -451,13 +451,12 @@
       margin-bottom: 10px;
     }
 
-    /* زر الإيميل اللي بيفتح الـ Gmail */
     .email-address {
       display: inline-block;
       text-decoration: none;
       font-size: 1.2rem;
       font-weight: 900;
-      color: #0984e3;
+      color: #004EE9;
       background: #f0f8ff;
       padding: 10px 15px;
       border-radius: 10px;
@@ -467,27 +466,29 @@
     }
 
     .email-address:hover {
-      background: #0984e3;
+      background: #004EE9;
       color: white;
-      border-color: #0984e3;
+      border-color: #004EE9;
       transform: scale(1.05);
     }
 
-    /* تدرجات الألوان */
+    /* ══════════════════════════════════
+       تدرجات الألوان الجديدة
+    ══════════════════════════════════ */
     .c-red {
-      background: linear-gradient(135deg, #ff7675, #d63031);
+      background: linear-gradient(135deg, #f55151, #DF0101);
     }
 
     .c-blue {
-      background: linear-gradient(135deg, #74b9ff, #0984e3);
+      background: linear-gradient(135deg, #4d8aff, #004EE9);
     }
 
     .c-yellow {
-      background: linear-gradient(135deg, #fbcd35, #fdcb6e);
+      background: linear-gradient(135deg, #fff44f, #EEE300);
     }
 
     .c-green {
-      background: linear-gradient(135deg, #55efc4, #00b894);
+      background: linear-gradient(135deg, #8fe062, #6DCD39);
     }
 
     .c-black {
@@ -507,7 +508,7 @@
     }
 
     .c-yellow .funny-quote {
-      color: #d63031;
+      color: #DF0101;
       text-shadow: none;
       font-weight: 900;
     }
@@ -634,9 +635,9 @@
   </div>
 
   <script>
-    // توليد الفقاعات (Particles)
+    // توليد الفقاعات (Particles) بالألوان الجديدة
     function initParticles() {
-      const pColors = ['#ff7675', '#74b9ff', '#ffeaa7', '#55efc4', '#ffffff'];
+      const pColors = ['#DF0101', '#004EE9', '#EEE300', '#6DCD39', '#ffffff'];
       const pWrap = document.getElementById('particles-container');
       for (let i = 0; i < 35; i++) {
         const el = document.createElement('div');
@@ -657,10 +658,10 @@
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzos9Cw-KSQ2UyIcoUoqgMNH0ZlQwdqFzCHrl2-HKxbNDGkILPcqiQM0D-anidNXIdC-g/exec';
 
     const colorData = {
-      red: { name: 'الأحمر', colorHex: '#d63031', emoji: '🔥', class: 'c-red', link: 'https://www.verywellmind.com/the-color-psychology-of-red-2795821', points: [{ icon: '🔴', text: 'كله طاقة وحماس وشغف ملوش حدود.' }, { icon: '🚀', text: 'لون بيخطف العين ويلفت الانتباه في ثانية.' }], quote: '🥊 "أنت غالباً بتحب الأكشن وممكن تتخانق مع دبان وشك"' },
-      blue: { name: 'الأزرق', colorHex: '#0984e3', emoji: '🌊', class: 'c-blue', link: 'https://www.verywellmind.com/the-color-psychology-of-blue-2795815', points: [{ icon: '🔵', text: 'بيعبر عن الهدوء والثقة والاحترافية في التعامل.' }, { icon: '🛡️', text: 'بيدل إنك شخص عاقل، راسي، والناس بتثق فيك.' }], quote: '🥶 "أنت شخص رايق لدرجة تثير الريبة والشك"' },
-      yellow: { name: 'الأصفر', colorHex: '#fdcb6e', emoji: '☀️', class: 'c-yellow', link: 'https://www.verywellmind.com/the-color-psychology-of-yellow-2795823', points: [{ icon: '🟡', text: 'لون الفرفشة والسعادة والتفاؤل اللي بجد.' }, { icon: '🎨', text: 'بيدل إنك شخص بتاع حركة وتجديد ومبتحبش الروتين.' }], quote: '🤩 "بتضحك وتتفائل كتير لدرجة إن الناس بتقلق عليك"' },
-      green: { name: 'الأخضر', colorHex: '#00b894', emoji: '🌿', class: 'c-green', link: 'https://www.verywellmind.com/color-psychology-green-2795817', points: [{ icon: '🟢', text: 'لون الطبيعة والنمو والتوازن النفسي التمام.' }, { icon: '🤝', text: 'بيدل إنك شخص مسالم، كريم، وبتحب الخير للكل.' }], quote: '🐸 "أنت غالباً بتكلم الزرع والقطط في الشارع وهم بيردوا عليك"' },
+      red: { name: 'الأحمر', colorHex: '#DF0101', emoji: '🔥', class: 'c-red', link: 'https://www.verywellmind.com/the-color-psychology-of-red-2795821', points: [{ icon: '🔴', text: 'كله طاقة وحماس وشغف ملوش حدود.' }, { icon: '🚀', text: 'لون بيخطف العين ويلفت الانتباه في ثانية.' }], quote: '🥊 "أنت غالباً بتحب الأكشن وممكن تتخانق مع دبان وشك"' },
+      blue: { name: 'الأزرق', colorHex: '#004EE9', emoji: '🌊', class: 'c-blue', link: 'https://www.verywellmind.com/the-color-psychology-of-blue-2795815', points: [{ icon: '🔵', text: 'بيعبر عن الهدوء والثقة والاحترافية في التعامل.' }, { icon: '🛡️', text: 'بيدل إنك شخص عاقل، راسي، والناس بتثق فيك.' }], quote: '🥶 "أنت شخص رايق لدرجة تثير الريبة والشك"' },
+      yellow: { name: 'الأصفر', colorHex: '#EEE300', emoji: '☀️', class: 'c-yellow', link: 'https://www.verywellmind.com/the-color-psychology-of-yellow-2795823', points: [{ icon: '🟡', text: 'لون الفرفشة والسعادة والتفاؤل اللي بجد.' }, { icon: '🎨', text: 'بيدل إنك شخص بتاع حركة وتجديد ومبتحبش الروتين.' }], quote: '🤩 "بتضحك وتتفائل كتير لدرجة إن الناس بتقلق عليك"' },
+      green: { name: 'الأخضر', colorHex: '#6DCD39', emoji: '🌿', class: 'c-green', link: 'https://www.verywellmind.com/color-psychology-green-2795817', points: [{ icon: '🟢', text: 'لون الطبيعة والنمو والتوازن النفسي التمام.' }, { icon: '🤝', text: 'بيدل إنك شخص مسالم، كريم، وبتحب الخير للكل.' }], quote: '🐸 "أنت غالباً بتكلم الزرع والقطط في الشارع وهم بيردوا عليك"' },
       black: { name: 'الأسود', colorHex: '#2d3436', emoji: '🎩', class: 'c-black', link: 'https://www.verywellmind.com/the-color-psychology-of-black-2795814', points: [{ icon: '⚫', text: 'رمز القوة، الشياكة، والغموض اللي بجد.' }, { icon: '🕶️', text: 'بيعكس استقلاليتك وجاذبيتك اللي ملهاش حل.' }], quote: '🖤 "فاكر نفسك البطل الغامض في الفيلم.. وأنت فعلاً كدا"' }
     };
 
