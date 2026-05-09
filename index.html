@@ -25,7 +25,7 @@
     }
 
     /* ══════════════════════════════════
-       الخلفية المتحركة والجزيئات (الفقاعات)
+       الخلفية المتحركة والجزيئات
     ══════════════════════════════════ */
     .bg-shapes {
       position: fixed;
@@ -82,13 +82,8 @@
     }
 
     @keyframes floatShape {
-      0% {
-        transform: translate(0, 0) scale(1);
-      }
-
-      100% {
-        transform: translate(40px, -40px) scale(1.1);
-      }
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, -40px) scale(1.1); }
     }
 
     .particle {
@@ -101,19 +96,9 @@
     }
 
     @keyframes floatUp {
-      0% {
-        transform: translateY(105vh) scale(0.5);
-        opacity: 0;
-      }
-
-      20% {
-        opacity: 0.7;
-      }
-
-      100% {
-        transform: translateY(-10vh) scale(1.2);
-        opacity: 0;
-      }
+      0% { transform: translateY(105vh) scale(0.5); opacity: 0; }
+      20% { opacity: 0.7; }
+      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
     }
 
     /* ══════════════════════════════════
@@ -233,7 +218,7 @@
     }
 
     .input-field:focus {
-      border-color: #0984e3;
+      border-color: var(--dynamic-color, #0984e3);
     }
 
     .btn-theme {
@@ -259,6 +244,17 @@
       background-color: #d63031;
       color: white;
       margin-top: 20px;
+    }
+
+    /* تأثير الهزة للرقم السري الخاطئ */
+    .shake {
+      animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+    }
+    @keyframes shake {
+      10%, 90% { transform: translate3d(-1px, 0, 0); }
+      20%, 80% { transform: translate3d(2px, 0, 0); }
+      30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+      40%, 60% { transform: translate3d(4px, 0, 0); }
     }
 
     /* الكويز */
@@ -475,65 +471,22 @@
     /* ══════════════════════════════════
        تدرجات الألوان الجديدة
     ══════════════════════════════════ */
-    .c-red {
-      background: linear-gradient(135deg, #f55151, #DF0101);
-    }
-
-    .c-blue {
-      background: linear-gradient(135deg, #4d8aff, #004EE9);
-    }
-
-    .c-yellow {
-      background: linear-gradient(135deg, #fff44f, #EEE300);
-    }
-
-    .c-green {
-      background: linear-gradient(135deg, #8fe062, #6DCD39);
-    }
-
-    .c-black {
-      background: linear-gradient(135deg, #636e72, #2d3436);
-    }
+    .c-red { background: linear-gradient(135deg, #f55151, #DF0101); }
+    .c-blue { background: linear-gradient(135deg, #4d8aff, #004EE9); }
+    .c-yellow { background: linear-gradient(135deg, #fff44f, #EEE300); }
+    .c-green { background: linear-gradient(135deg, #8fe062, #6DCD39); }
+    .c-black { background: linear-gradient(135deg, #636e72, #2d3436); }
 
     /* تخصيص الأصفر */
-    .c-yellow .single-color-name {
-      color: #2d3436;
-      text-shadow: none;
-    }
-
-    .c-yellow .color-points li {
-      color: #2d3436;
-      background: rgba(0, 0, 0, 0.08);
-      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.03);
-    }
-
-    .c-yellow .funny-quote {
-      color: #DF0101;
-      text-shadow: none;
-      font-weight: 900;
-    }
-
-    .c-yellow .external-link {
-      color: #2d3436;
-      border-color: rgba(0, 0, 0, 0.3);
-      background: rgba(0, 0, 0, 0.05);
-    }
-
-    .c-yellow .external-link:hover {
-      background: rgba(0, 0, 0, 0.15);
-      color: #000;
-    }
+    .c-yellow .single-color-name { color: #2d3436; text-shadow: none; }
+    .c-yellow .color-points li { color: #2d3436; background: rgba(0, 0, 0, 0.08); box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.03); }
+    .c-yellow .funny-quote { color: #DF0101; text-shadow: none; font-weight: 900; }
+    .c-yellow .external-link { color: #2d3436; border-color: rgba(0, 0, 0, 0.3); background: rgba(0, 0, 0, 0.05); }
+    .c-yellow .external-link:hover { background: rgba(0, 0, 0, 0.15); color: #000; }
 
     @keyframes emojiBounce {
-
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-8px);
-      }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
     }
   </style>
 </head>
@@ -549,6 +502,23 @@
   <div id="particles-container" style="position: fixed; inset: 0; pointer-events: none; z-index: 1;"></div>
 
   <img src="logo.png" alt="Spark Logo" id="topLogo" class="top-logo" onclick="openEmail()" title="تواصل معنا">
+
+  <div class="page" id="page-lock">
+    <div class="page-content">
+      <div class="glass-box" id="lockBox">
+        <img src="logo.png" alt="Spark Logo" class="big-logo" title="SPARK Team">
+        <h1 class="box-title">قفل البريزنتيشن 🔒</h1>
+        <p style="color: #636e72; font-size: 1.1rem; margin-bottom: 25px; font-weight: bold;">
+          المحتوى مقفول حالياً.. هيتم كشف الرقم السري في نهاية العرض!
+        </p>
+        <div class="input-group" style="text-align: center;">
+          <input type="password" id="passcodeInput" class="input-field" placeholder="أدخل الرقم السري" style="text-align: center; font-size: 1.2rem; letter-spacing: 5px;">
+        </div>
+        <p id="lockError" style="color: #d63031; font-weight: bold; display: none; margin-bottom: 15px;">الرقم السري غير صحيح، حاول تاني! ❌</p>
+        <button class="btn-theme dynamic-bg dynamic-text" onclick="unlockContent()">فتح المحتوى 🚀</button>
+      </div>
+    </div>
+  </div>
 
   <div class="page" id="page-error">
     <div class="page-content">
@@ -635,7 +605,6 @@
   </div>
 
   <script>
-    // توليد الفقاعات (Particles) بالألوان الجديدة
     function initParticles() {
       const pColors = ['#DF0101', '#004EE9', '#EEE300', '#6DCD39', '#ffffff'];
       const pWrap = document.getElementById('particles-container');
@@ -654,7 +623,6 @@
       }
     }
 
-    // 🔴 حط لينك الـ Web App بتاع جوجل سكريبت هنا 🔴
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzos9Cw-KSQ2UyIcoUoqgMNH0ZlQwdqFzCHrl2-HKxbNDGkILPcqiQM0D-anidNXIdC-g/exec';
 
     const colorData = {
@@ -680,19 +648,20 @@
       document.getElementById(pageId).classList.add('active');
     }
 
-    // دوال نافذة الإيميل
     function openEmail() { document.getElementById('emailModal').classList.add('active'); }
     function closeEmail() { document.getElementById('emailModal').classList.remove('active'); }
 
     window.onload = () => {
-      initParticles(); // تشغيل الفقاعات
+      initParticles(); 
 
+      // 1. التحقق من وجود اللون في الرابط
       if (!colorData[userColorKey] || !quizBank[userColorKey]) {
         go('page-error');
-        document.getElementById('topLogo').style.display = 'none'; // اخفاء اللوجو في صفحة الخطأ
+        document.getElementById('topLogo').style.display = 'none'; 
         return;
       }
 
+      // 2. تطبيق ألوان الفريق على النظام بالكامل (حتى على زرار القفل!)
       const teamInfo = colorData[userColorKey];
       const textColor = (userColorKey === 'yellow') ? '#2d3436' : '#ffffff';
 
@@ -701,13 +670,36 @@
       document.querySelectorAll('.dynamic-text').forEach(el => el.style.color = textColor);
       document.querySelectorAll('.dynamic-text-color').forEach(el => el.style.color = teamInfo.colorHex);
 
-      if (localStorage.getItem('spark_quiz_done') === 'true' && localStorage.getItem('spark_quiz_color') === userColorKey) {
-        buildFinalCard(true);
-        go('page-final');
-      } else {
-        go('page-login');
-      }
+      // 3. إظهار شاشة القفل كأول خطوة بدلاً من شاشة الدخول
+      go('page-lock');
     };
+
+    // ════════ دالة فك القفل ════════
+    function unlockContent() {
+      const code = document.getElementById('passcodeInput').value;
+      const errorMsg = document.getElementById('lockError');
+      const lockBox = document.getElementById('lockBox');
+
+      // الكود السري هو 2026
+      if (code === "2026") {
+        errorMsg.style.display = 'none';
+        
+        // لو الشخص كان مجاوب قبل كده، وديه للنتيجة النهائية علطول
+        if (localStorage.getItem('spark_quiz_done') === 'true' && localStorage.getItem('spark_quiz_color') === userColorKey) {
+          buildFinalCard(true);
+          go('page-final');
+        } else {
+          // لو أول مرة، وديه لصفحة تسجيل البيانات
+          go('page-login');
+        }
+      } else {
+        // لو الكود غلط، أظهر الرسالة وشغل أنيميشن الهزة
+        errorMsg.style.display = 'block';
+        lockBox.classList.remove('shake');
+        void lockBox.offsetWidth; // Trigger reflow to restart animation
+        lockBox.classList.add('shake');
+      }
+    }
 
     function saveData() {
       const name = document.getElementById('userName').value.trim();
