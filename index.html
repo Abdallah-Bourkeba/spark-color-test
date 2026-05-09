@@ -82,8 +82,13 @@
     }
 
     @keyframes floatShape {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(40px, -40px) scale(1.1); }
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      100% {
+        transform: translate(40px, -40px) scale(1.1);
+      }
     }
 
     .particle {
@@ -96,9 +101,19 @@
     }
 
     @keyframes floatUp {
-      0% { transform: translateY(105vh) scale(0.5); opacity: 0; }
-      20% { opacity: 0.7; }
-      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+      0% {
+        transform: translateY(105vh) scale(0.5);
+        opacity: 0;
+      }
+
+      20% {
+        opacity: 0.7;
+      }
+
+      100% {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+      }
     }
 
     /* ══════════════════════════════════
@@ -248,13 +263,31 @@
 
     /* تأثير الهزة للرقم السري الخاطئ */
     .shake {
-      animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+      animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
     }
+
     @keyframes shake {
-      10%, 90% { transform: translate3d(-1px, 0, 0); }
-      20%, 80% { transform: translate3d(2px, 0, 0); }
-      30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-      40%, 60% { transform: translate3d(4px, 0, 0); }
+
+      10%,
+      90% {
+        transform: translate3d(-1px, 0, 0);
+      }
+
+      20%,
+      80% {
+        transform: translate3d(2px, 0, 0);
+      }
+
+      30%,
+      50%,
+      70% {
+        transform: translate3d(-4px, 0, 0);
+      }
+
+      40%,
+      60% {
+        transform: translate3d(4px, 0, 0);
+      }
     }
 
     /* الكويز */
@@ -471,22 +504,65 @@
     /* ══════════════════════════════════
        تدرجات الألوان الجديدة
     ══════════════════════════════════ */
-    .c-red { background: linear-gradient(135deg, #f55151, #DF0101); }
-    .c-blue { background: linear-gradient(135deg, #4d8aff, #004EE9); }
-    .c-yellow { background: linear-gradient(135deg, #fff44f, #EEE300); }
-    .c-green { background: linear-gradient(135deg, #8fe062, #6DCD39); }
-    .c-black { background: linear-gradient(135deg, #636e72, #2d3436); }
+    .c-red {
+      background: linear-gradient(135deg, #f55151, #DF0101);
+    }
+
+    .c-blue {
+      background: linear-gradient(135deg, #4d8aff, #004EE9);
+    }
+
+    .c-yellow {
+      background: linear-gradient(135deg, #fff44f, #EEE300);
+    }
+
+    .c-green {
+      background: linear-gradient(135deg, #8fe062, #6DCD39);
+    }
+
+    .c-black {
+      background: linear-gradient(135deg, #636e72, #2d3436);
+    }
 
     /* تخصيص الأصفر */
-    .c-yellow .single-color-name { color: #2d3436; text-shadow: none; }
-    .c-yellow .color-points li { color: #2d3436; background: rgba(0, 0, 0, 0.08); box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.03); }
-    .c-yellow .funny-quote { color: #DF0101; text-shadow: none; font-weight: 900; }
-    .c-yellow .external-link { color: #2d3436; border-color: rgba(0, 0, 0, 0.3); background: rgba(0, 0, 0, 0.05); }
-    .c-yellow .external-link:hover { background: rgba(0, 0, 0, 0.15); color: #000; }
+    .c-yellow .single-color-name {
+      color: #2d3436;
+      text-shadow: none;
+    }
+
+    .c-yellow .color-points li {
+      color: #2d3436;
+      background: rgba(0, 0, 0, 0.08);
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.03);
+    }
+
+    .c-yellow .funny-quote {
+      color: #DF0101;
+      text-shadow: none;
+      font-weight: 900;
+    }
+
+    .c-yellow .external-link {
+      color: #2d3436;
+      border-color: rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .c-yellow .external-link:hover {
+      background: rgba(0, 0, 0, 0.15);
+      color: #000;
+    }
 
     @keyframes emojiBounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
     }
   </style>
 </head>
@@ -512,9 +588,11 @@
           المحتوى مقفول حالياً.. هيتم كشف الرقم السري في نهاية العرض!
         </p>
         <div class="input-group" style="text-align: center;">
-          <input type="password" id="passcodeInput" class="input-field" placeholder="أدخل الرقم السري" style="text-align: center; font-size: 1.2rem; letter-spacing: 5px;">
+          <input type="password" id="passcodeInput" class="input-field" style="direction: ltr; text-align: center;"
+            placeholder="أدخل الرقم السري" style="text-align: center; font-size: 1.2rem; letter-spacing: 5px;">
         </div>
-        <p id="lockError" style="color: #d63031; font-weight: bold; display: none; margin-bottom: 15px;">الرقم السري غير صحيح، حاول تاني! ❌</p>
+        <p id="lockError" style="color: #d63031; font-weight: bold; display: none; margin-bottom: 15px;">الرقم السري غير
+          صحيح، حاول تاني! ❌</p>
         <button class="btn-theme dynamic-bg dynamic-text" onclick="unlockContent()">فتح المحتوى 🚀</button>
       </div>
     </div>
@@ -634,11 +712,11 @@
     };
 
     const quizBank = {
-      red: { question: "سؤال اللون الأحمر: من هو الشخص الذي ذكرنا أنه يمثل طاقة اللون الأحمر في الفريق؟", options: ["عبدالله", "أحمد", "يوسف", "مجتبى"], correctAnswer: "يوسف" },
-      blue: { question: "مين من التيم كان لابس جرافتة زرقاء؟", options: ["عبدالله", "مصطفى", "محمد", "أسامة"], correctAnswer: "عبدالله" },
-      yellow: { question: "أي البراندات التالية تم ذكرها كمثال للون الأصفر؟", options: ["ماكدونالدز", "فيسبوك", "ستاربكس", "أبل"], correctAnswer: "ماكدونالدز" },
-      green: { question: "ما هو الشعور الأساسي الذي ينقله اللون الأخضر حسب البريزنتيشن؟", options: ["الغضب", "السلام الداخلي والنمو", "الحزن", "الغموض"], correctAnswer: "السلام الداخلي والنمو" },
-      black: { question: "اللون الأسود في التسويق غالباً يُستخدم للدلالة على...", options: ["السرعة", "الطفولة", "الفخامة والرقي", "الخصومات"], correctAnswer: "الفخامة والرقي" }
+      red: { question: "حسب العرض، إيه هي الوسيلة اللي تم اختراعها في 2012 عشان تساعد مصابي عمى الألوان؟", options: ["عمليات الليزر", "قطرة طبية للعين", "نظارات مخصصة", "مفيش أي وسيلة مساعدة"], correctAnswer: "نظارات مخصصة" },
+      blue: { question: "في الإعلان بتاع كوكاكولا اللي عرضته من ثواني.. الغطا اللي كان عليه الـ QR Code عشان الناس تعمله سكان، كان لونه إيه؟", options: ["اصفر", "اخضر", "ازرق", "احمر"], correctAnswer: "اصفر" },
+      yellow: { question: "حسب القصة اللي سمعناها، إيه هو السبب الرئيسي وراء اختيار اللون الأحمر واللون الأخضر بالتحديد في إشارة المرور؟", options: ["لأنها كانت الألوان الوحيدة المتاحة في اللمبات وقت اختراعها.", "لأن اللون الأحمر مرتبط بغريزة الخطر عند الإنسان، والأخضر بيدي إحساس بالطبيعة والأمان.", "عشان دي الألوان اللي بتدي شكل جمالي أفضل وتلفت الانتباه من بعيد.", "لأن شركات السيارات في العشرينات هي اللي طلبت استخدام الألوان دي."], correctAnswer: "لأن اللون الأحمر مرتبط بغريزة الخطر عند الإنسان، والأخضر بيدي إحساس بالطبيعة والأمان." },
+      green: { question: `من خلال تجربة "لوجو واتساب" وفكرة تنظيم تطبيقات الموبايل، المخ البشري بيتعامل مع "اللون" على إنه إيه بالظبط؟`, options: ["مجرد شكل جمالي وديكور مريح للعين.", "معلومة معقدة بتاخد وقت ومجهود كبير في التذكر.", "أولوية وأداة سريعة للتعرف على الأشياء وتوفير المجهود والوقت.", "تفصيلة بتشتت الانتباه عن شكل الأشياء الحقيقي."], correctAnswer: "أولوية وأداة سريعة للتعرف على الأشياء وتوفير المجهود والوقت." },
+      black: { question: "إيه هو الفيلم العربي القديم (الأبيض والأسود) اللي صورته ظهرت كمثال في العرض؟", options: ["ابن حميدو", "إسماعيل يس في الأسطول", "إشاعة حب", "الرجل الثاني"], correctAnswer: "إسماعيل يس في الأسطول" }
     };
 
     let userColorKey = window.location.hash.replace('#', '').toLowerCase();
@@ -652,12 +730,28 @@
     function closeEmail() { document.getElementById('emailModal').classList.remove('active'); }
 
     window.onload = () => {
-      initParticles(); 
+      initParticles();
+
+      // ====== بداية كود التحقق من مرور 60 دقيقة ======
+      const savedTime = localStorage.getItem('spark_quiz_timestamp');
+      if (savedTime) {
+        const now = Date.now();
+        const waitTime = 60 * 60 * 1000; // 60 دقيقة بالملي ثانية
+        if (now - parseInt(savedTime) > waitTime) {
+          // مسح البيانات للسماح بالتسجيل مرة أخرى
+          localStorage.removeItem('spark_quiz_done');
+          localStorage.removeItem('spark_quiz_color');
+          localStorage.removeItem('spark_quiz_timestamp');
+          localStorage.removeItem('spark_name');
+          localStorage.removeItem('spark_code');
+        }
+      }
+      // ====== نهاية كود التحقق ======
 
       // 1. التحقق من وجود اللون في الرابط
       if (!colorData[userColorKey] || !quizBank[userColorKey]) {
         go('page-error');
-        document.getElementById('topLogo').style.display = 'none'; 
+        document.getElementById('topLogo').style.display = 'none';
         return;
       }
 
@@ -683,7 +777,7 @@
       // الكود السري هو 2026
       if (code === "2026") {
         errorMsg.style.display = 'none';
-        
+
         // لو الشخص كان مجاوب قبل كده، وديه للنتيجة النهائية علطول
         if (localStorage.getItem('spark_quiz_done') === 'true' && localStorage.getItem('spark_quiz_color') === userColorKey) {
           buildFinalCard(true);
@@ -723,7 +817,6 @@
 
       go('page-color');
     }
-
     function submitQuiz() {
       const selected = document.querySelector('input[name="answer"]:checked');
       if (!selected) { alert("لازم تختار إجابة الأول!"); return; }
@@ -752,6 +845,10 @@
           if (data.result === 'success') {
             localStorage.setItem('spark_quiz_done', 'true');
             localStorage.setItem('spark_quiz_color', userColorKey);
+
+            // ====== حفظ وقت التسجيل بالملي ثانية ======
+            localStorage.setItem('spark_quiz_timestamp', Date.now().toString());
+
             document.getElementById('loader').style.display = 'none';
             buildFinalCard(false);
             go('page-final');
@@ -763,7 +860,6 @@
           alert("حصلت مشكلة في وصول البيانات! اتأكد من الإنترنت ودوس إرسال مرة تانية.");
         });
     }
-
     function buildFinalCard(isAlreadyRegistered) {
       const data = colorData[userColorKey];
       const card = document.getElementById('finalCard');
